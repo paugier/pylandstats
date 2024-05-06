@@ -1,4 +1,5 @@
 """Multi-landscape analysis."""
+
 import abc
 import functools
 
