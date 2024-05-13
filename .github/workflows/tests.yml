@@ -27,7 +27,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # see https://github.com/serge-sans-paille/pythran/issues/2203
       - uses: mamba-org/setup-micromamba@v1
+        if: matrix.python-version == '3.12'
+        with:
+          environment-name: test-env
+          create-args: >-
+            openblas
+            python=${{ matrix.python-version }}
+            pip
+
+      - uses: mamba-org/setup-micromamba@v1
+        if: matrix.python-version != '3.12'
         with:
           environment-name: test-env
           create-args: >-
